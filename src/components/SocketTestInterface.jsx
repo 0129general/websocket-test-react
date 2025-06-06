@@ -14,8 +14,11 @@ const SocketTestInterface = () => {
       { timestamp: new Date().toISOString(), message },
     ]);
   };
-  const node_server_url = process.env.REACT_APP_NODE_SERVER_URL;
-  const socket_server_url = process.env.REACT_APP_SOCKET_SERVER_URL;
+
+  const node_server_url =
+    "https://websocket-apptest-b6c51ecc78a9.herokuapp.com";
+  const socket_server_url =
+    "wss://websocket-apptest-b6c51ecc78a9.herokuapp.com";
   // console.log("node:", node_server_url);
   // console.log("socket:", socket_server_url);
   console.log("socket:", socket);
