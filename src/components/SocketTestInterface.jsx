@@ -16,8 +16,9 @@ const SocketTestInterface = () => {
   };
   const node_server_url = process.env.REACT_APP_NODE_SERVER_URL;
   const socket_server_url = process.env.REACT_APP_SOCKET_SERVER_URL;
-  console.log("node:", node_server_url);
-  console.log("socket:", socket_server_url);
+  // console.log("node:", node_server_url);
+  // console.log("socket:", socket_server_url);
+  console.log("socket:", socket);
   useEffect(() => {
     const newSocket = io(socket_server_url || "http://localhost:3001", {
       reconnection: true,
