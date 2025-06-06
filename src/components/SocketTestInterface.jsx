@@ -81,7 +81,7 @@ const SocketTestInterface = () => {
       clearInterval(pingInterval);
       newSocket.disconnect();
     };
-  }, [kitchenName]);
+  }, [kitchenName, socket_server_url]);
 
   const createTestOrder = async () => {
     try {
