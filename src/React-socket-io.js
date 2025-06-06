@@ -26,7 +26,7 @@ export default function ReactSocket({
 
     socket.on("connect", () => {
       setConnectionStatus("Connected");
-      console.log("? Connected", socket.id);
+      console.log("Connected", socket.id);
     });
 
     socket.on("disconnect", (reason) => {
@@ -46,11 +46,11 @@ export default function ReactSocket({
     }, 30000);
 
     socket.on("pong", () => {
-      console.log("?? Pong received");
+      console.log("Pong received");
     });
 
     socket.on(KitchenName, (arg) => {
-      console.log("?? Received order", arg);
+      console.log("Received order", arg);
       if (
         arg?.internal_order_status === "pending" &&
         arg?.delivery_date === currentDate

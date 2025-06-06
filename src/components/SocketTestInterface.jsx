@@ -14,26 +14,26 @@ const SocketTestInterface = () => {
       { timestamp: new Date().toISOString(), message },
     ]);
   };
-
+  const node_server_url = process.env.REACT_APP_NODE_SERVER_URL;
+  const socket_server_url = process.env.REACT_APP_SOCKET_SERVER_URL;
+  console.log("node:", node_server_url);
+  console.log("socket:", socket_server_url);
   useEffect(() => {
-    const newSocket = io(
-      process.env.REACT_APP_NOTIFICATION_SERVER_URL || "http://localhost:3001",
-      {
-        reconnection: true,
-        reconnectionAttempts: Infinity,
-        reconnectionDelay: 1000,
-        reconnectionDelayMax: 5000,
-        timeout: 10000,
-        query: {
-          type: "kitchen_frontend_app",
-          KitchenName: kitchenName,
-        },
-        transports: ["websocket"],
-        forceNew: true,
-        pingTimeout: 60000,
-        pingInterval: 25000,
-      }
-    );
+    const newSocket = io(socket_server_url || "http://localhost:3001", {
+      reconnection: true,
+      reconnectionAttempts: Infinity,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      timeout: 10000,
+      query: {
+        type: "kitchen_frontend_app",
+        KitchenName: kitchenName,
+      },
+      transports: ["websocket"],
+      forceNew: true,
+      pingTimeout: 60000,
+      pingInterval: 25000,
+    });
 
     setSocket(newSocket);
 
@@ -85,7 +85,7 @@ const SocketTestInterface = () => {
 
   const createTestOrder = async () => {
     try {
-      const response = await fetch("http://localhost:3001/test-order", {
+      const response = await fetch(`${node_server_url}/test-order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const SocketTestInterface = () => {
 
   const checkServerStatus = async () => {
     try {
-      const response = await fetch("http://localhost:3001/status");
+      const response = await fetch(`${node_server_url}/status`);
       const data = await response.json();
       addLog(`Server status: ${JSON.stringify(data)}`);
     } catch (error) {
