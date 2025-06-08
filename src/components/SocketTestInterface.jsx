@@ -89,17 +89,14 @@ const SocketTestInterface = () => {
 
   const createTestOrder = async () => {
     const testPayload = {
-      data: {
-        email: "syed5511@gmail.com",
-        delivery_type: "home delivery",
-        kitchen_name: kitchenName,
-        internal_order_status: "order accepted by kitchen",
-        joined_order_no: "11/30/2024-JOIN9619403833",
-        order_no: "11/30/2024-MEAL1511952339",
-        delivery_time_slot: "11:30 am - 12:15 pm",
-        delivery_date: new Date().toISOString().split("T")[0],
-      },
-      whomToNotify: "kitchen",
+      email: "syed5511@gmail.com",
+      delivery_type: "home delivery",
+      kitchen_name: kitchenName,
+      internal_order_status: "order accepted by kitchen",
+      joined_order_no: "11/30/2024-JOIN9619403833",
+      order_no: "11/30/2024-MEAL1511952339",
+      delivery_time_slot: "11:30 am - 12:15 pm",
+      delivery_date: new Date().toISOString().split("T")[0],
     };
 
     try {
