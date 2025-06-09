@@ -23,7 +23,7 @@ const SocketTestInterface = () => {
   // console.log("socket:", socket_server_url);
   console.log("socket:", socket);
   useEffect(() => {
-    const newSocket = io(socket_server_url || "http://localhost:3001", {
+    const newSocket = io("ws://localhost:3007", {
       reconnection: true,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
