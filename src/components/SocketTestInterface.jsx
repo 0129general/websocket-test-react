@@ -23,6 +23,24 @@ const SocketTestInterface = () => {
   // console.log("socket:", socket_server_url);
   console.log("socket:", socket);
   useEffect(() => {
+    const source = new EventSource(`/sse/kitchen/${kitchenName}`);
+
+    source.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log("📦 SSE Order received:", data);
+      // Handle the order like before
+    };
+
+    source.onerror = (err) => {
+      console.error("SSE connection error", err);
+    };
+
+    return () => {
+      source.close();
+    };
+  }, [kitchenName]);
+
+  useEffect(() => {
     const newSocket = io("ws://localhost:3007", {
       reconnection: true,
       reconnectionAttempts: Infinity,
