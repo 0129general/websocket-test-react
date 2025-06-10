@@ -16,7 +16,6 @@ const SocketTestInterface = () => {
   };
 
   const node_server_url =
-    `http://localhost:3001` ||
     "https://websocket-apptest-b6c51ecc78a9.herokuapp.com";
   const socket_server_url =
     "wss://websocket-apptest-b6c51ecc78a9.herokuapp.com";
@@ -25,7 +24,7 @@ const SocketTestInterface = () => {
   console.log("socket:", socket);
   useEffect(() => {
     const source = new EventSource(
-      `http://localhost:3001/sse/kitchen/${kitchenName}`
+      `${node_server_url}/sse/kitchen/${kitchenName}`
     );
 
     source.onmessage = (event) => {
@@ -45,7 +44,7 @@ const SocketTestInterface = () => {
   }, [kitchenName]);
 
   useEffect(() => {
-    const newSocket = io("ws://localhost:3001", {
+    const newSocket = io(`${socket_server_url}`, {
       reconnection: true,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
