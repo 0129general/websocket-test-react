@@ -16,6 +16,7 @@ const SocketTestInterface = () => {
   };
 
   const node_server_url =
+    `http://localhost:3001` ||
     "https://websocket-apptest-b6c51ecc78a9.herokuapp.com";
   const socket_server_url =
     "wss://websocket-apptest-b6c51ecc78a9.herokuapp.com";
@@ -23,11 +24,14 @@ const SocketTestInterface = () => {
   // console.log("socket:", socket_server_url);
   console.log("socket:", socket);
   useEffect(() => {
-    const source = new EventSource(`/sse/kitchen/${kitchenName}`);
+    const source = new EventSource(
+      `http://localhost:3001/sse/kitchen/${kitchenName}`
+    );
 
     source.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log("📦 SSE Order received:", data);
+      setOrders((prev) => [...prev, data]);
       // Handle the order like before
     };
 
@@ -41,7 +45,7 @@ const SocketTestInterface = () => {
   }, [kitchenName]);
 
   useEffect(() => {
-    const newSocket = io("ws://localhost:3007", {
+    const newSocket = io("ws://localhost:3001", {
       reconnection: true,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
